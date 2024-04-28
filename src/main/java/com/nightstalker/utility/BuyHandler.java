@@ -11,6 +11,8 @@ import com.nightstalker.property.PropertyStatus;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class BuyHandler {
@@ -24,6 +26,10 @@ public class BuyHandler {
             switch (main.prompt(scanner))
             {
                 case 1:
+                    if ( Period.between(owner.getAccount().getDob(), LocalDate.now()).getYears() < 18 ){
+                        System.out.println("You are not 18 yet! you cannot buy a property or engage in an auction!");
+                    }
+
                     List<Property> availableForSale = property.stream()
                             .map(p -> p.orElse(null))
                             .filter(Objects::nonNull)
@@ -129,6 +135,7 @@ public class BuyHandler {
                     List<Property> ownedProperty = property.stream()
                             .map(p -> p.orElse(null))
                             .filter(Objects::nonNull)
+                            .filter(p -> p.getOwner() != null)
                             .filter(p -> p.getOwner().equals(owner))
                             .toList();
 

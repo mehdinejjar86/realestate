@@ -38,4 +38,12 @@ public class PropertyRating {
         this.comment = comment;
     }
 
+    @Override
+    public String toString() {
+        return "ProfileRating{" +
+                "property=" + profile +
+                ", rate=" + rate +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

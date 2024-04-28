@@ -12,8 +12,6 @@ public class Profile implements Serializable, PromptPeople {
     private String lastName;
     private Account account;
     private List<ProfileRating> rating = new ArrayList<>();
-    private Profile bidder;
-//    private
 
     public Profile(String firstName, String lastName, Account account) {
         this.firstName = nameFormatter(firstName);

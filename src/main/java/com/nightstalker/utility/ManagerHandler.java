@@ -192,7 +192,7 @@ public class ManagerHandler {
                                     try {
                                         yearI = Integer.parseInt(year);
                                         int currentYear = Year.now().getValue();
-                                        if (yearI > currentYear)
+                                        if (yearI >= currentYear)
                                             correctYear = true;
                                         else {
                                             System.out.printf("Invalid year of bid: %d%n", yearI);
@@ -221,12 +221,12 @@ public class ManagerHandler {
                                     System.out.println("Invalid date format! Correct format is dd-mm-yyyy");
                                 }
 
-                                if (correctDay && correctMonth && correctYear)
+                                if (correctDay && correctMonth && correctYear && LocalDate.of(yearI, monthI, dayI).isAfter(createdProperty.getDateOfListing()))
                                     break;
                             }
 
                             LocalDate endDateBid = LocalDate.of(yearI, monthI, dayI);
-                            createdProperty.setEndAuction(endDateBid);
+                            createdProperty.setEndAvailability(endDateBid);
 
                             break;
                     }
@@ -261,9 +261,7 @@ public class ManagerHandler {
     }
 
     private static boolean isFurnished(Scanner scanner) {
-        System.out.println("Enter the Street Address");
         boolean furniture = true;
-
         System.out.println("The property is furnished [y]/n");
         while (true) {
             String furnished = scanner.nextLine();

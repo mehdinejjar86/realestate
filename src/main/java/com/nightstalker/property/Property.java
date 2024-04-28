@@ -7,6 +7,7 @@ import com.nightstalker.people.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,11 @@ public class Property implements Serializable {
     private String streetAddress;
     private String lineAddress;
     private PropertyStatus status;
-    private Buyer owner;
+    private Profile owner;
+    private Profile renter;
     private BigDecimal price;
 
+    private boolean isAvailable = true;
     private Profile bidder;
 
     private List<PropertyRating> rating = new ArrayList<>();
@@ -31,8 +34,11 @@ public class Property implements Serializable {
     private int bathroom;
     private double floorArea;
     private boolean furniture;
+
+
+
     private LocalDate dateOfListing;
-    private LocalDate endAuction;
+    private LocalDate endAvailability;
 
     public Property(Manager manager, String streetAddress, String lineAddress, int room, int bathroom, double floorArea, boolean furniture) {
         this.manager = manager;
@@ -89,12 +95,20 @@ public class Property implements Serializable {
     }
 
 
-    public Buyer getOwner() {
+    public Profile getOwner() {
         return owner;
     }
 
-    public void setOwner(Buyer owner) {
+    public void setOwner(Profile owner) {
         this.owner = owner;
+    }
+
+    public Profile getRenter() {
+        return renter;
+    }
+
+    public void setRenter(Profile renter) {
+        this.renter = renter;
     }
 
     public void removeHouseKeeper(HouseKeeper houseKeeper) {
@@ -170,12 +184,28 @@ public class Property implements Serializable {
         this.bidder = bidder;
     }
 
-    public LocalDate getEndAuction() {
-        return endAuction;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setEndAuction(LocalDate endAuction) {
-        this.endAuction = endAuction;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public LocalDate getEndAvailability() {
+        return endAvailability;
+    }
+
+    public void setEndAvailability(LocalDate endAvailability) {
+        this.endAvailability = endAvailability;
+    }
+
+    public LocalDate getDateOfListing() {
+        return dateOfListing;
+    }
+
+    public void setDateOfListing(LocalDate dateOfListing) {
+        this.dateOfListing = dateOfListing;
     }
 
     @Override
@@ -203,14 +233,14 @@ public class Property implements Serializable {
                              "\nLine Address: " + lineAddress +
                              "\nStatus: " + status +
                              "\nOccupied: " + (owner != null ? owner.getFirstName() + " " + owner.getLastName() : "Not assigned") +
-                             "\nprice: " + price +
-                             "\nhousekeeper: " + housekeeper +
-                             "\ncontractor: " + contractor +
-                             "\nrating: " + rating +
-                             "\nbathroom: " + bathroom +
-                             "\nfloorArea: " + floorArea +
-                             "\nfurniture: " + furniture +
-                             "\ndateOfListing: " + dateOfListing;
+                             "\nHouse keeper: " + housekeeper +
+                             "\nContractor: " + contractor +
+                             "\nRating: " + rating +
+                             "\nBathroom: " + bathroom +
+                             "\nFloor Area: " + floorArea +
+                             "\nFurniture: " + furniture +
+                             "\nDate of Listing: " + dateOfListing +
+                             "\nPricing: " + NumberFormat.getCurrencyInstance().format(price);
 
         return art.concat(information);
     }

@@ -13,7 +13,6 @@ public class SerializeManager<T> {
             ObjectInputStream obj = new ObjectInputStream(file);
             List<T> readObject = (List<T>) obj.readObject();
 
-            System.out.println(readObject);
             System.out.println(filepath + " read Successfully!");
 
             file.close();

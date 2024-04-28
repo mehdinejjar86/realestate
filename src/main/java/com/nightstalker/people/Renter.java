@@ -5,6 +5,7 @@ import com.nightstalker.menu.Menu;
 import com.nightstalker.property.Property;
 import com.nightstalker.utility.CreateList;
 import com.nightstalker.utility.HousekeeperManager;
+import com.nightstalker.utility.RenterHandler;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class Renter extends Profile{
 
     @Override
     public List<Optional<Property>> prompt(List<Optional<Property>> property, List<Optional<Profile>> profile, Scanner scanner) {
-        return property;
+        return RenterHandler.prompt(property, profile, this, scanner);
     }
 
 }
