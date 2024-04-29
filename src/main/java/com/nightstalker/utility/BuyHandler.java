@@ -15,22 +15,38 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
+/**
+ * The type Buy handler.
+ */
 public class BuyHandler {
 
     private static final String[] option = {"Search", "Search Filtered", "My Properties", "Log out"};
+    private static final String[] sorting = {"Price", "Type", "Return"};
     private static final String[] decision = {"Buy", "Return"};
+
+    /**
+     * Prompt list.
+     *
+     * @param property the property
+     * @param profile  the profile
+     * @param owner    the owner
+     * @param scanner  the scanner
+     * @return the list
+     */
     public static List<Optional<Property>> prompt(List<Optional<Property>> property, List<Optional<Profile>> profile, Buyer owner, Scanner scanner) {
         Menu main = new Menu(CreateList.create(option));
         boolean logoutFlag = false;
+        List<Optional<Property>> toBeFiltered = new ArrayList<>(property);
         while(!logoutFlag) {
             switch (main.prompt(scanner))
             {
                 case 1:
                     if ( Period.between(owner.getAccount().getDob(), LocalDate.now()).getYears() < 18 ){
                         System.out.println("You are not 18 yet! you cannot buy a property or engage in an auction!");
+                        break;
                     }
 
-                    List<Property> availableForSale = property.stream()
+                    List<Property> availableForSale = toBeFiltered.stream()
                             .map(p -> p.orElse(null))
                             .filter(Objects::nonNull)
                             .filter(p-> p.getStatus().equals(PropertyStatus.FOR_SALE) || p.getStatus().equals(PropertyStatus.AUCTION))
@@ -129,7 +145,28 @@ public class BuyHandler {
                     }
                     break;
                 case 2:
-                    System.out.println("WIP");
+                    Menu filterMenu = new Menu(CreateList.create(sorting));
+                    switch (filterMenu.prompt(scanner)) {
+                        case 1:
+                            toBeFiltered = new ArrayList<>(toBeFiltered.stream()
+                                    .map(p-> p.orElse(null))
+                                    .filter(Objects::nonNull)
+                                    .sorted(Comparator.comparing(Property::getPrice))
+                                    .map(Optional::ofNullable)
+                                    .toList());
+                            break;
+                        case 2:
+                            toBeFiltered = new ArrayList<>(toBeFiltered.stream()
+                                    .map(p-> p.orElse(null))
+                                    .filter(Objects::nonNull)
+                                    .sorted(Comparator.comparing(Property::toString))
+                                    .map(Optional::ofNullable)
+                                    .toList());
+                            break;
+                        case 3:
+                            break;
+                    }
+
                     break;
                 case 3:
                     List<Property> ownedProperty = property.stream()

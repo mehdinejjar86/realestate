@@ -7,19 +7,24 @@ import com.nightstalker.menu.ASCIIart;
 import com.nightstalker.property.Property;
 import com.nightstalker.utility.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.nightstalker.utility.AccountManager.*;
+
+/**
+ * The type Main.
+ */
 public class Main {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         // List<Optional<Account>> accounts = AccountManager.getAccount();
         List<Optional<Property>> property = SerializeManager.read("property.ser");
         List<Optional<Profile>> profile = SerializeManager.read("profile.ser");
-
-
 
         Menu startPageMenu = new Menu(CreateList.create("Log in", "Register", "Help", "Exit"));
         System.out.println(ASCIIart.welcome());

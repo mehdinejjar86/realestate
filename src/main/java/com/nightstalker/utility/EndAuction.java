@@ -8,19 +8,30 @@ import com.nightstalker.property.PropertyStatus;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * The type End auction.
+ */
 public class EndAuction {
+    /**
+     * Check auction list.
+     *
+     * @param property the property
+     * @return the list
+     */
     public static List<Optional<Property>> checkAuction(List<Optional<Property>> property) {
-        return property.stream()
+        return new ArrayList<>(property.stream()
                 .map(p -> p.orElse(null))
                 .filter(Objects::nonNull)
-                .filter(p -> p.getStatus() == PropertyStatus.AUCTION)
-                .filter(p -> LocalDate.now().isAfter(p.getEndAvailability()))
-                .map(p -> { Property nP = p;
-                     nP.setOwner(p.getBidder());
-                     nP.setBidder(null);
-                     return nP;
+                .peek(p -> {  if (p.getStatus() == PropertyStatus.AUCTION
+                        && LocalDate.now().isAfter(p.getEndAvailability())
+                        && p.getBidder() != null){
+                    p.setOwner(p.getBidder());
+                    p.setBidder(null);
+                    p.setManager(null);
+                    p.setStatus(PropertyStatus.SOLD);
+                     }
                 })
                 .map(Optional::ofNullable)
-                .toList();
+                .toList());
     }
 }

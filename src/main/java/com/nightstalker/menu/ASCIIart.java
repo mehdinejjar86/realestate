@@ -1,6 +1,14 @@
 package com.nightstalker.menu;
 
+/**
+ * The type Asci iart.
+ */
 public class ASCIIart {
+    /**
+     * Welcome string.
+     *
+     * @return the string
+     */
     public static String welcome() {
         return """
                 __          __  _                         \s
@@ -11,6 +19,12 @@ public class ASCIIart {
                     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|
                 """;
     }
+
+    /**
+     * Register string.
+     *
+     * @return the string
+     */
     public static String register() {
         return """
                  _____            _     _           \s
@@ -24,6 +38,11 @@ public class ASCIIart {
                 """;
     }
 
+    /**
+     * Login string.
+     *
+     * @return the string
+     */
     public static String login() {
         return """
                  _                   _____      \s
@@ -37,6 +56,11 @@ public class ASCIIart {
                 """;
     }
 
+    /**
+     * Property string.
+     *
+     * @return the string
+     */
     public static String property() {
         return """
                       `'::::.

@@ -11,8 +11,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * The type Renter.
+ */
 public class Renter extends Profile{
 
+    /**
+     * Instantiates a new Renter.
+     *
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param account   the account
+     */
     public Renter(String firstName, String lastName, Account account) {
         super(firstName, lastName, account);
     }

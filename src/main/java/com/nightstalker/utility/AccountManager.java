@@ -14,15 +14,32 @@ import java.util.regex.Pattern;
 
 import static com.nightstalker.utility.HashPassword.checkPassword;
 
+/**
+ * The type Account manager.
+ */
 public class AccountManager {
+    /**
+     * The constant emailRegex.
+     */
     public static String emailRegex = "^[\\w]+[\\w-\\.]*[\\w]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    /**
+     * The constant passwordRegex.
+     */
     public static String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&-])[A-Za-z\\d@$!%*?&-]{8,}$";
+    /**
+     * The constant dateRegex.
+     */
     public static String dateRegex = "^(?<day>\\d{1,2})-(?<month>\\d{1,2})-(?<year>\\d{1,})$";
 
     private static final String URL = "jdbc:postgresql://localhost:5432/RealEstate";
     private static final String USER = "postgres";
     private static final String PASSWORD = "root";
 
+    /**
+     * Create account account.
+     *
+     * @return the account
+     */
     public static Account createAccount()
     {
         String email;
@@ -127,6 +144,12 @@ public class AccountManager {
         return new Account(email.toLowerCase(), HashPassword.hashPassword(password), dob);
     }
 
+    /**
+     * Insert account.
+     *
+     * @param account the account
+     * @throws SQLException the sql exception
+     */
     public static void insertAccount(Account account) throws SQLException {
         String sql = "INSERT INTO account (email, hashed_password, dob) VALUES (?, ?, ?)";
 
@@ -147,6 +170,17 @@ public class AccountManager {
         }
     }
 
+
+
+
+
+
+
+    /**
+     * Gets account.
+     *
+     * @return the account
+     */
     public static List<Optional<Account>> getAccount() {
         String sql = "SELECT email, hashed_password, dob FROM account";
         List<Optional<Account>> accountsList = new ArrayList<>();
@@ -169,6 +203,12 @@ public class AccountManager {
         return accountsList;
     }
 
+    /**
+     * Log in optional.
+     *
+     * @param profile the profile
+     * @return the optional
+     */
     public static Optional<Profile> logIn (List<Optional<Profile>> profile) {
 
         Optional<String> email;
@@ -195,7 +235,10 @@ public class AccountManager {
         userFound = profile.stream()
                 .map(p -> p.orElse(null))
                 .filter(Objects::nonNull)
-                .filter(p -> p.getAccount().getEmail().equals(finalEmail.orElse("unknown").toLowerCase()) && checkPassword(finalPassword.orElse("unknown"), p.getAccount().getPassword() ))
+                .filter(p -> p.getAccount()
+                        .getEmail()
+                        .equals(finalEmail.orElse("unknown").toLowerCase())
+                        && checkPassword(finalPassword.orElse("unknown"), p.getAccount().getPassword() ))
                 .findFirst();
         if (userFound.isEmpty())
             System.out.println("Invalid Password or Email!");
@@ -203,6 +246,12 @@ public class AccountManager {
         return userFound;
     }
 
+    /**
+     * Is email available boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public static boolean isEmailAvailable(String email) {
         String sql = "SELECT 1 FROM account WHERE email = ?";
 

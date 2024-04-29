@@ -6,13 +6,26 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The type Serialize manager.
+ *
+ * @param <T> the type parameter
+ */
 public class SerializeManager<T> {
+    /**
+     * Read list.
+     *
+     * @param <T>      the type parameter
+     * @param filepath the filepath
+     * @return the list
+     */
     public static <T> List<Optional<T>> read(String filepath) {
         try {
             FileInputStream file = new FileInputStream(filepath);
             ObjectInputStream obj = new ObjectInputStream(file);
             List<T> readObject = (List<T>) obj.readObject();
 
+            System.out.println(readObject);
             System.out.println(filepath + " read Successfully!");
 
             file.close();
@@ -26,6 +39,13 @@ public class SerializeManager<T> {
 
     }
 
+    /**
+     * Write.
+     *
+     * @param <T>      the type parameter
+     * @param filepath the filepath
+     * @param array    the array
+     */
     public static <T> void write(String filepath, List<Optional<T>> array) {
         try {
             List<T> toBeSaved =  array.stream()

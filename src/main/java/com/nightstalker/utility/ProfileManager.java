@@ -8,9 +8,21 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The type Profile manager.
+ */
 public class ProfileManager {
+    /**
+     * The constant nameRegex.
+     */
     public static String nameRegex = "[\\w]+[-]?[\\w]+$";
 
+    /**
+     * Create profile profile.
+     *
+     * @param account the account
+     * @return the profile
+     */
     public static Profile createProfile(Account account) {
         System.out.println("Please enter a valid first name");
         Scanner scanner = new Scanner(System.in);
@@ -56,6 +68,12 @@ public class ProfileManager {
         };
     }
 
+    /**
+     * Check name boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public static boolean checkName(String name) {
         Pattern namePattern = Pattern.compile(nameRegex);
         Matcher nameMatcher = namePattern.matcher(name);

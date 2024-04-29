@@ -1,18 +1,26 @@
 package com.nightstalker.people;
 
 import com.nightstalker.account.Account;
-import com.nightstalker.menu.Menu;
 import com.nightstalker.property.Property;
 import com.nightstalker.utility.BuyHandler;
-import com.nightstalker.utility.CreateList;
-import com.nightstalker.utility.ManagerHandler;
+
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * The type Buyer.
+ */
 public class Buyer extends Profile {
 
+    /**
+     * Instantiates a new Buyer.
+     *
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param account   the account
+     */
     public Buyer(String firstName, String lastName, Account account) {
         super(firstName, lastName, account);
     }

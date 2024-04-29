@@ -7,10 +7,18 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+/**
+ * The type Menu.
+ */
 public class Menu implements Serializable {
     final private List<Optional<String>> statement;
     final private Integer numberOfChoices;
 
+    /**
+     * Instantiates a new Menu.
+     *
+     * @param statement the statement
+     */
     public Menu(List<Optional<String>> statement) {
         if (statement == null || statement.isEmpty())
             statement = handleEmpty();
@@ -24,6 +32,12 @@ public class Menu implements Serializable {
         return empty;
     }
 
+    /**
+     * Prompt integer.
+     *
+     * @param scanner the scanner
+     * @return the integer
+     */
     public Integer prompt(Scanner scanner) {
         IntStream.range(0, numberOfChoices)
                 .mapToObj((digit) -> String.format("%d %s", digit+1, statement.get(digit).orElse("Unknown")))

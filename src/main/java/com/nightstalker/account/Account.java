@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * The type Account.
+ */
 public class Account implements Serializable {
     private String email;
     private String password;

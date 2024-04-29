@@ -8,9 +8,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * The type House keeper.
+ */
 public class HouseKeeper extends Profile{
 
 
+    /**
+     * Instantiates a new House keeper.
+     *
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param account   the account
+     */
     public HouseKeeper(String firstName, String lastName, Account account) {
         super(firstName, lastName, account);
     }

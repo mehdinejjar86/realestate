@@ -15,9 +15,24 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The type Manager handler.
+ */
 public class ManagerHandler {
+    /**
+     * The Property type.
+     */
     public static String[] propertyType = {"House", "Villa", "Apartment", "Studio", "Commercial"};
 
+    /**
+     * Prompt list.
+     *
+     * @param manager  the manager
+     * @param property the property
+     * @param profile  the profile
+     * @param scanner  the scanner
+     * @return the list
+     */
     public static List<Optional<Property>> prompt(Manager manager, List<Optional<Property>> property, List<Optional<Profile>> profile, Scanner scanner) {
         Menu menu = new Menu(CreateList.create("My Listing", "List a Property", "Log Out"));
         System.out.printf("Welcome manager %s %s!%n", manager.getFirstName(), manager.getLastName());
@@ -467,6 +482,13 @@ public class ManagerHandler {
         return new House(manager, stAddress, lnAddress, room, bathroom, floorArea, furniture, kitchen, garage, livingRoom, floor, porch);
     }
 
+    /**
+     * Create villa villa.
+     *
+     * @param manager the manager
+     * @param scanner the scanner
+     * @return the villa
+     */
     public static Villa createVilla(Manager manager, Scanner scanner) {
         String stAddress = streetAddress("Enter the Street Address", scanner);
         String lnAddress = streetAddress("Enter the Line Address", scanner);
@@ -599,6 +621,13 @@ public class ManagerHandler {
         return new Villa(manager, stAddress, lnAddress, room, bathroom, floorArea, furniture, kitchen, garage, livingRoom, floor, outdoorArea, basement);
     }
 
+    /**
+     * Create apartment apartment.
+     *
+     * @param manager the manager
+     * @param scanner the scanner
+     * @return the apartment
+     */
     public static Apartment createApartment(Manager manager, Scanner scanner) {
         String stAddress = streetAddress("Enter the Street Address", scanner);
         String lnAddress = streetAddress("Enter the Line Address", scanner);
@@ -663,6 +692,13 @@ public class ManagerHandler {
         return new Apartment(manager, stAddress, lnAddress, room, bathroom, floorArea, furniture, garage, kitchen, livingRoom);
     }
 
+    /**
+     * Create studio studio.
+     *
+     * @param manager the manager
+     * @param scanner the scanner
+     * @return the studio
+     */
     public static Studio createStudio(Manager manager, Scanner scanner) {
         String stAddress = streetAddress("Enter the Street Address", scanner);
         String lnAddress = streetAddress("Enter the Line Address", scanner);
@@ -703,6 +739,13 @@ public class ManagerHandler {
         return new Studio(manager, stAddress, lnAddress, room, bathroom, floorArea, furniture, kitchen, balkony);
     }
 
+    /**
+     * Create commercial commercial.
+     *
+     * @param manager the manager
+     * @param scanner the scanner
+     * @return the commercial
+     */
     public static Commercial createCommercial(Manager manager, Scanner scanner) {
         String stAddress = streetAddress("Enter the Street Address", scanner);
         String lnAddress = streetAddress("Enter the Line Address", scanner);

@@ -8,8 +8,21 @@ import com.nightstalker.property.Property;
 
 import java.util.*;
 
+/**
+ * The type Housekeeper manager.
+ */
 public class HousekeeperManager {
     private static final String[] option = {"Check Assigned Task", "Log out"};
+
+    /**
+     * Prompt list.
+     *
+     * @param property    the property
+     * @param profile     the profile
+     * @param houseKeeper the house keeper
+     * @param scanner     the scanner
+     * @return the list
+     */
     public static List<Optional<Property>> prompt(List<Optional<Property>> property, List<Optional<Profile>> profile, HouseKeeper houseKeeper, Scanner scanner) {
         Menu main = new Menu(CreateList.create(option));
         boolean logoutFlag = false;

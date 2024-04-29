@@ -15,12 +15,26 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * The type Renter handler.
+ */
 public class RenterHandler {
     private static final String[] option = {"Search", "Search Filtered", "My Rents", "Log out"};
+    private static final String[] sorting = {"Price", "Type", "Return"};
     private static final String[] decision = {"Rent", "Return"};
+
+    /**
+     * Prompt list.
+     *
+     * @param property the property
+     * @param profile  the profile
+     * @param renter   the renter
+     * @param scanner  the scanner
+     * @return the list
+     */
     public static List<Optional<Property>> prompt(List<Optional<Property>> property, List<Optional<Profile>> profile, Renter renter, Scanner scanner) {
         Menu optionMenu = new Menu(CreateList.create(option));
-
+        List<Optional<Property>> toBeFiltered = property;
         boolean logoutFlag = false;
         while(!logoutFlag) {
             switch (optionMenu.prompt(scanner))
@@ -129,7 +143,28 @@ public class RenterHandler {
                     selectedForRent.addRating(propertyRating);
                     break;
                 case 2:
-                    System.out.println("WIP");
+                    Menu filterMenu = new Menu(CreateList.create(sorting));
+                    switch (filterMenu.prompt(scanner)) {
+                        case 1:
+                            toBeFiltered = new ArrayList<>(toBeFiltered.stream()
+                                    .map(p-> p.orElse(null))
+                                    .filter(Objects::nonNull)
+                                    .sorted(Comparator.comparing(Property::getPrice))
+                                    .map(Optional::ofNullable)
+                                    .toList());
+                            break;
+                        case 2:
+                            toBeFiltered = new ArrayList<>(toBeFiltered.stream()
+                                    .map(p-> p.orElse(null))
+                                    .filter(Objects::nonNull)
+                                    .sorted(Comparator.comparing(Property::toString))
+                                    .map(Optional::ofNullable)
+                                    .toList());
+                            break;
+                        case 3:
+                            break;
+                    }
+
                     break;
                 case 3:
                     List<Property> rentedProperty = property.stream()

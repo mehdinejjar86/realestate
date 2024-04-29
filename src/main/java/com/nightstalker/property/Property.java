@@ -1,6 +1,5 @@
 package com.nightstalker.property;
 
-import com.nightstalker.interaction.ProfileRating;
 import com.nightstalker.interaction.PropertyRating;
 import com.nightstalker.menu.ASCIIart;
 import com.nightstalker.people.*;
@@ -14,6 +13,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The type Property.
+ */
 public class Property implements Serializable {
     private Manager manager;
     private String streetAddress;
@@ -40,6 +42,17 @@ public class Property implements Serializable {
     private LocalDate dateOfListing;
     private LocalDate endAvailability;
 
+    /**
+     * Instantiates a new Property.
+     *
+     * @param manager       the manager
+     * @param streetAddress the street address
+     * @param lineAddress   the line address
+     * @param room          the room
+     * @param bathroom      the bathroom
+     * @param floorArea     the floor area
+     * @param furniture     the furniture
+     */
     public Property(Manager manager, String streetAddress, String lineAddress, int room, int bathroom, double floorArea, boolean furniture) {
         this.manager = manager;
         this.streetAddress = streetAddress;
@@ -50,67 +63,147 @@ public class Property implements Serializable {
         this.dateOfListing = LocalDate.now();
     }
 
+    /**
+     * Gets manager.
+     *
+     * @return the manager
+     */
     public Manager getManager() {
         return manager;
     }
 
+    /**
+     * Sets manager.
+     *
+     * @param manager the manager
+     */
     public void setManager(Manager manager) {
         this.manager = manager;
     }
 
+    /**
+     * Gets street address.
+     *
+     * @return the street address
+     */
     public String getStreetAddress() {
         return streetAddress;
     }
 
+    /**
+     * Sets street address.
+     *
+     * @param streetAddress the street address
+     */
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
 
+    /**
+     * Gets line address.
+     *
+     * @return the line address
+     */
     public String getLineAddress() {
         return lineAddress;
     }
 
+    /**
+     * Sets line address.
+     *
+     * @param lineAddress the line address
+     */
     public void setLineAddress(String lineAddress) {
         this.lineAddress = lineAddress;
     }
 
+    /**
+     * Add house keeper.
+     *
+     * @param houseKeeper the house keeper
+     */
     public void addHouseKeeper(HouseKeeper houseKeeper) {
         this.housekeeper.add(Optional.ofNullable(houseKeeper));
     }
 
+    /**
+     * Gets housekeeper.
+     *
+     * @return the housekeeper
+     */
     public List<Optional<HouseKeeper>> getHousekeeper() {
         return housekeeper;
     }
 
+    /**
+     * Sets housekeeper.
+     *
+     * @param housekeeper the housekeeper
+     */
     public void setHousekeeper(List<Optional<HouseKeeper>> housekeeper) {
         this.housekeeper = housekeeper;
     }
 
+    /**
+     * Gets contractor.
+     *
+     * @return the contractor
+     */
     public List<Optional<Contractor>> getContractor() {
         return contractor;
     }
 
+    /**
+     * Sets contractor.
+     *
+     * @param contractor the contractor
+     */
     public void setContractor(List<Optional<Contractor>> contractor) {
         this.contractor = contractor;
     }
 
 
+    /**
+     * Gets owner.
+     *
+     * @return the owner
+     */
     public Profile getOwner() {
         return owner;
     }
 
+    /**
+     * Sets owner.
+     *
+     * @param owner the owner
+     */
     public void setOwner(Profile owner) {
         this.owner = owner;
     }
 
+    /**
+     * Gets renter.
+     *
+     * @return the renter
+     */
     public Profile getRenter() {
         return renter;
     }
 
+    /**
+     * Sets renter.
+     *
+     * @param renter the renter
+     */
     public void setRenter(Profile renter) {
         this.renter = renter;
     }
 
+    /**
+     * Remove house keeper.
+     *
+     * @param houseKeeper the house keeper
+     */
     public void removeHouseKeeper(HouseKeeper houseKeeper) {
         this.housekeeper = this.housekeeper.stream()
                 .map(r -> r.orElse(null))
@@ -119,10 +212,20 @@ public class Property implements Serializable {
                 .toList();
     }
 
+    /**
+     * Add contractor.
+     *
+     * @param contractor the contractor
+     */
     public void addContractor(Contractor contractor) {
         this.contractor.add(Optional.ofNullable(contractor));
     }
 
+    /**
+     * Remove contractor.
+     *
+     * @param contractor the contractor
+     */
     public void removeContractor(Contractor contractor) {
         this.contractor = this.contractor.stream()
                 .map(r -> r.orElse(null))
@@ -131,79 +234,174 @@ public class Property implements Serializable {
                 .toList();
     }
 
+    /**
+     * Gets bathroom.
+     *
+     * @return the bathroom
+     */
     public int getBathroom() {
         return bathroom;
     }
 
+    /**
+     * Sets bathroom.
+     *
+     * @param bathroom the bathroom
+     */
     public void setBathroom(int bathroom) {
         this.bathroom = bathroom;
     }
 
 
+    /**
+     * Gets floor area.
+     *
+     * @return the floor area
+     */
     public double getFloorArea() {
         return floorArea;
     }
 
+    /**
+     * Sets floor area.
+     *
+     * @param floorArea the floor area
+     */
     public void setFloorArea(double floorArea) {
         this.floorArea = floorArea;
     }
 
+    /**
+     * Is furniture boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFurniture() {
         return furniture;
     }
 
+    /**
+     * Sets furniture.
+     *
+     * @param furniture the furniture
+     */
     public void setFurniture(boolean furniture) {
         this.furniture = furniture;
     }
 
+    /**
+     * Gets status.
+     *
+     * @return the status
+     */
     public PropertyStatus getStatus() {
         return status;
     }
 
+    /**
+     * Sets status.
+     *
+     * @param status the status
+     */
     public void setStatus(PropertyStatus status) {
         this.status = status;
     }
 
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * Add rating.
+     *
+     * @param rating the rating
+     */
     public void addRating(PropertyRating rating) {
         this.rating.add(rating);
     }
 
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    /**
+     * Gets bidder.
+     *
+     * @return the bidder
+     */
     public Profile getBidder() {
         return bidder;
     }
 
+    /**
+     * Sets bidder.
+     *
+     * @param bidder the bidder
+     */
     public void setBidder(Profile bidder) {
         this.bidder = bidder;
     }
 
+    /**
+     * Is available boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAvailable() {
         return isAvailable;
     }
 
+    /**
+     * Sets available.
+     *
+     * @param available the available
+     */
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
 
+    /**
+     * Gets end availability.
+     *
+     * @return the end availability
+     */
     public LocalDate getEndAvailability() {
         return endAvailability;
     }
 
+    /**
+     * Sets end availability.
+     *
+     * @param endAvailability the end availability
+     */
     public void setEndAvailability(LocalDate endAvailability) {
         this.endAvailability = endAvailability;
     }
 
+    /**
+     * Gets date of listing.
+     *
+     * @return the date of listing
+     */
     public LocalDate getDateOfListing() {
         return dateOfListing;
     }
 
+    /**
+     * Sets date of listing.
+     *
+     * @param dateOfListing the date of listing
+     */
     public void setDateOfListing(LocalDate dateOfListing) {
         this.dateOfListing = dateOfListing;
     }
@@ -212,12 +410,12 @@ public class Property implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Property property)) return false;
-        return Objects.equals(manager, property.manager) && Objects.equals(streetAddress, property.streetAddress) && Objects.equals(lineAddress, property.lineAddress);
+        return Objects.equals(streetAddress, property.streetAddress) && Objects.equals(lineAddress, property.lineAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manager, streetAddress, lineAddress);
+        return Objects.hash(streetAddress, lineAddress);
     }
 
     @Override
@@ -226,9 +424,11 @@ public class Property implements Serializable {
         String art = ASCIIart.property();
         String manager = this.manager != null ? this.manager.getFirstName() + " " + this.manager.getLastName() : "Not assigned";
         String managerReview = "[]";
-        if (manager != null)
+        String propertyReview = "[]";
+        if (this.manager != null)
             managerReview = this.manager.getRating().toString();
-        String information = "Manager: " + manager +
+        String information = "Manager: " + manager + " " + managerReview +
+                             "\nProperty Reviews" + rating +
                              "\nStreet Address: " + streetAddress +
                              "\nLine Address: " + lineAddress +
                              "\nStatus: " + status +
